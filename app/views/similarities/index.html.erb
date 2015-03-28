@@ -1,16 +1,17 @@
-<%- model_class = Similarity -%>
+
 <div class="page-header">
-  <h1><%=t '.title', :default => Similarity %></h1>
+  <h1>PTT 推文相似度</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
      
-      <th><%= model_class.human_attribute_name(:score) %></th>
+      <th>相似度</th>
    
-      <th><%= model_class.human_attribute_name("鄉民A") %></th>
-      <th><%= model_class.human_attribute_name("鄉民B") %></th>
-    
+      <th>鄉民A</th>
+      <th>推文數</th>
+      <th>鄉民B</th>
+      <th>推文數</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,7 +21,9 @@
         
         <td><%= link_to similarity.score, similarity_path(similarity) %></td>
         <td><%= link_to similarity.user.name, user_path(similarity.user) %></td>
+        <td><%= similarity.user.pushes.length%></td>
         <td><%= link_to similarity.partner, user_path(User.find_by(name:similarity.partner )) %></td>
+         <td><%= User.find_by(name:similarity.partner ).pushes.length%></td>
     
         <td>
           <%= link_to similarity_path(similarity), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>

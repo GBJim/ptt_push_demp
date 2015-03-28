@@ -1,16 +1,42 @@
 <%- model_class = Similarity -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => Similarity %></h1>
+  <h1>相似度</h1>
 </div>
 
 <div class="fieldset">
   <dl>
       <dt class="label label-default"><%= model_class.human_attribute_name(:score) %></dt>
-      <dd><pre class="prettyprint"><%= @similarity.score %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:partner) %></dt>
-      <dd><pre class="prettyprint"><%= @similarity.partner %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:user_id) %></dt>
-      <dd><pre class="prettyprint"><%= @similarity.user_id %></pre></dd>
+      <dd><pre class="prettyprint"><%= @similarity.score %></pre>
+
+      </dd>
+      <dt class="label label-default"><%= @similarity.user.name %></dt>
+      <dd>
+      <tbody>
+    <% @similarity.user.pushes.each do |push| %>
+      <tr>
+        
+        <td><%= push.body%></td>
+      
+      </tr>
+    <% end %>
+  </tbody>
+
+
+      </dd>
+      <dt class="label label-default"><%= @similarity.partner %></dt>
+      <dd>
+              <tbody>
+    <% User.find_by(name:@similarity.partner).pushes.each do |push| %>
+      <tr>
+        
+        <td><%= push.body%></td>
+      
+      </tr>
+    <% end %>
+  </tbody>
+
+
+      </dd>
   </dl>
 </div>
 
