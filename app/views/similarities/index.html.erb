@@ -1,31 +1,40 @@
-<h1>Listing similarities</h1>
-
-<table>
+<%- model_class = Similarity -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Similarity %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Score</th>
-      <th>User</th>
-      <th>Partner</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:score) %></th>
+      <th><%= model_class.human_attribute_name(:partner) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @similarities.each do |similarity| %>
       <tr>
+        <td><%= similarity.id %></td>
         <td><%= similarity.score %></td>
-        <td><%= similarity.user %></td>
         <td><%= similarity.partner %></td>
         <td><%= similarity.user_id %></td>
-        <td><%= link_to 'Show', similarity %></td>
-        <td><%= link_to 'Edit', edit_similarity_path(similarity) %></td>
-        <td><%= link_to 'Destroy', similarity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l similarity.created_at, format: :long %></td>
+        <td>
+          <%= link_to similarity_path(similarity), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to similarity_path(similarity), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Similarity', new_similarity_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_similarity_path,
+            :class => 'btn btn-primary' %>

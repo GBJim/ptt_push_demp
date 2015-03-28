@@ -1,24 +1,28 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Similarity -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Similarity %></h1>
+</div>
 
-<p>
-  <strong>Score:</strong>
-  <%= @similarity.score %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:score) %></dt>
+      <dd><pre class="prettyprint"><%= @similarity.score %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:partner) %></dt>
+      <dd><pre class="prettyprint"><%= @similarity.partner %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:user_id) %></dt>
+      <dd><pre class="prettyprint"><%= @similarity.user_id %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @similarity.user %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              similarities_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_similarity_path(@similarity), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              similarity_path(@similarity),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Partner:</strong>
-  <%= @similarity.partner %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @similarity.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_similarity_path(@similarity) %> |
-<%= link_to 'Back', similarities_path %>
