@@ -5,22 +5,23 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+     
       <th><%= model_class.human_attribute_name(:score) %></th>
-      <th><%= model_class.human_attribute_name(:partner) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+   
+      <th><%= model_class.human_attribute_name("鄉民A") %></th>
+      <th><%= model_class.human_attribute_name("鄉民B") %></th>
+    
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @similarities.each do |similarity| %>
       <tr>
-        <td><%= similarity.id %></td>
-        <td><%= similarity.score %></td>
-        <td><%= similarity.partner %></td>
-        <td><%= similarity.user_id %></td>
-        <td><%=l similarity.created_at, format: :long %></td>
+        
+        <td><%= link_to similarity.score, similarity_path(similarity) %></td>
+        <td><%= link_to similarity.user.name, user_path(similarity.user) %></td>
+        <td><%= link_to similarity.partner, user_path(User.find_by(name:similarity.partner )) %></td>
+    
         <td>
           <%= link_to similarity_path(similarity), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
             <%= glyph 'info-sign' %>
