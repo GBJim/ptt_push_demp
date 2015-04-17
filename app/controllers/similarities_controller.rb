@@ -1,5 +1,6 @@
 class SimilaritiesController < ApplicationController
   before_action :set_similarity, only: [:show, :edit, :update, :destroy]
+  caches_page :index
 
   # GET /similarities
   # GET /similarities.json

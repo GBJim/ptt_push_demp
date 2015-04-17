@@ -15,7 +15,7 @@
     <% @similarity.user.pushes.each do |push| %>
       <tr>
         
-        <td><%= push.body%></td>
+        <td><%= push.body%></td><br>
       
       </tr>
     <% end %>
@@ -29,7 +29,7 @@
     <% User.find_by(name:@similarity.partner).pushes.each do |push| %>
       <tr>
         
-        <td><%= push.body%></td>
+        <td><%= push.body%></td><br>
       
       </tr>
     <% end %>
