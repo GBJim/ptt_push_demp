@@ -3,6 +3,26 @@ require 'set'
 
 
 
+
+CSV.foreach(filename, :headers => true) do |row|
+  User.create!(row.to_hash)
+end
+
+
+
+
+filename = "data_preprocess/pushList.csv"
+
+CSV.foreach(filename, :headers => true) do |row|
+
+  user = User.find_or_create_by(name: row[:user_name])
+  user.pushes.create(body: row[:body])
+  user.save
+end
+
+
+
+
 usersSet = Set.new
 users_to_id = {}
 user_names = []
@@ -44,7 +64,7 @@ Similarity.import similarities
 
 
 
-=begin
+
 usersSet = Set.new
 users_to_id = {}
 user_names = []
